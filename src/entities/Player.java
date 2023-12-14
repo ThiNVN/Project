@@ -18,16 +18,18 @@ public class Player extends Entity {
 	private int playerAction = IDLE;
 	private boolean left, up ,right, down;
 	private boolean moving = false, attacking = false;
-	private float playerSpeed = 2.01f;
-	
-	public Player(float x, float y, float i, float j) {
-		super(x, y);
+	private float playerSpeed = 1.0f;
+	private int[][] lvlData;
+	public Player(float x, float y, int width, int height) {
+		super(x, y, width, height);
 		loadAnimation();
 	}
 	
 	public void update() {
 		
 		updatePos();
+		
+		updateHitBox();
 		
 		setAnimation();
 		
@@ -36,7 +38,8 @@ public class Player extends Entity {
 	}
 	
 	public void render(Graphics g) {
-		g.drawImage(animations[playerAction][aniDex],(int) x, (int) y, 256, 160, null);
+		g.drawImage(animations[playerAction][aniDex],(int) x, (int) y, width, height, null);
+		drawHitbox(g);
 	}
 	
 	
@@ -109,6 +112,9 @@ public class Player extends Entity {
 			}
 		
 		
+	}
+	public void loadLvlData(int[][] lvlData ) {
+		this.lvlData = lvlData;
 	}
 
 	public boolean isLeft() {

@@ -11,7 +11,7 @@ import main.Game;
 
 public class LoadSave {
 	
-	public static final String PlAYER_ATLAS = "player_sprites.png";
+	public static final String PlAYER_ATLAS ="player_sprites.png";
 	public static final String LEVEL_ATLAS = "outside_sprites.png";
 	public final static String LEVEL_ONE_DATA = "level_one_data.png";
 	public static BufferedImage GetSpriteAtlas(String fileName) {
@@ -31,14 +31,19 @@ public class LoadSave {
 				}
 		}
 		return img;
+	}
 		public static int[][] GetLevelData(){
 			int[][] lvlData = new int[Game.TILES_IN_HEIGHT][Game.TILES_IN_WIDTH];
 			BufferedImage img = GetSpriteAtlas(LEVEL_ONE_DATA);
 			for (int j = 0;j < img.getHeight(); j++)
 				for (int i = 0;i < img.getTileWidth(); i++) {
 					Color color  = new Color(img.getRGB(i, j)); 
+					int value = color.getRed();
+					if ( value >= 48)
+						value = 0;
+					lvlData [j][i] = value;
 				}
-					
+				return lvlData;	
 		}
-	}
+	
 }
