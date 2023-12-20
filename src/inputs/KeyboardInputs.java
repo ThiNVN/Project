@@ -34,6 +34,9 @@ public class KeyboardInputs implements KeyListener {
 		case KeyEvent.VK_D:
 			gamePanel.GetGame().GetPlayer().setRight(false);
 			break;
+		case KeyEvent.VK_SPACE:
+			gamePanel.GetGame().GetPlayer().setJump(false);
+			break;
 		}
 	}
 
@@ -52,6 +55,9 @@ public class KeyboardInputs implements KeyListener {
 			break;
 		case KeyEvent.VK_D:
 			gamePanel.GetGame().GetPlayer().setRight(true);
+			break;
+		case KeyEvent.VK_SPACE:
+			gamePanel.GetGame().GetPlayer().setJump(true);
 			break;
 		}
 

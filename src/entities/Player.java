@@ -2,7 +2,7 @@ package entities;
 
 
 import static utilz.constant.playerConstants.*;
-import static utilz.HelpMethods.CanMoveHere;
+import static utilz.HelpMethods.*;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -17,16 +17,24 @@ public class Player extends Entity {
 	private BufferedImage[][] animations;
 	private	int aniTick,aniDex,aniSpeed = 25;
 	private int playerAction = IDLE;
-	private boolean left, up ,right, down;
+	private boolean left, up ,right, down, jump;
 	private boolean moving = false, attacking = false;
-	private float playerSpeed = 1.0f;
+	private float playerSpeed = 2.0f;
 	private int[][] lvlData;
 	private float xDrawOffset = 21 * Game.SCALE;
 	private float yDrawOffset = 4 * Game.SCALE;
+	
+
+//	jumping / Gravity	
+	private float airSpeed = 0f;
+	private float gravity = 0.04f * Game.SCALE;
+	private float jumpSpeed = -2.25f * Game.SCALE;
+	private float fallSpeedAfterCollision = 0.5f * Game.SCALE;
+	private boolean inAir = false;
 	public Player(float x, float y, int width, int height) {
 		super(x, y, width, height);
 		loadAnimation();
-		initHitBox(y, y, 20 * Game.SCALE, 28 * Game.SCALE);
+		initHitBox(y, y, 20 * Game.SCALE, 27 * Game.SCALE);
 	}
 	
 	public void update() {
@@ -43,7 +51,7 @@ public class Player extends Entity {
 	
 	public void render(Graphics g) {
 		g.drawImage(animations[playerAction][aniDex],(int)(hitBox.x - xDrawOffset), (int)(hitBox.y - yDrawOffset), width, height, null);
-		drawHitbox(g);
+//		drawHitbox(g);
 	}
 	
 	
@@ -57,6 +65,13 @@ public class Player extends Entity {
 		else {
 			playerAction = IDLE;
 		}
+		
+		if(inAir) {
+			if(airSpeed < 0)	
+				playerAction = JUMP;
+		}else
+			playerAction = FALLING;
+		
 		if (attacking) {
 			playerAction = ATTACK_1;
 		}
@@ -82,41 +97,68 @@ public class Player extends Entity {
 		}
 	}
 
-	
-
 	private void updatePos() {
 		moving = false;
-		if(!left && !right && !up && !down)
+		if(jump)
+			jump();
+			
+		if(!left && !right && !inAir)
 			return;
 		
-		float xSpeed = 0, ySpeed = 0;
+		float xSpeed = 0;
+		
+		if ( left ) 
+			xSpeed -= playerSpeed;
+		if(right )
+			xSpeed += playerSpeed;
+		if(!inAir) {
+			if(!IsEntityOnFloor(hitBox, lvlData)) {
+				inAir = true;
+			}
+		}
 			
-		if ( left && !right) {
-			xSpeed = -playerSpeed;
-		}else if(right && !left){
-			xSpeed = playerSpeed;
-		}
 		
-		
-		if (up && !down) {
-			ySpeed = -playerSpeed;
-		}else if(down && !up) {
-			ySpeed = playerSpeed;
-			
-		}
-//		if (CanMoveHere(x + xSpeed,y + ySpeed,width,height,lvlData)) {
-//			this.x += xSpeed;
-//			this.y += ySpeed;
-//			moving = true;
-//		}
-		
-		if (CanMoveHere(hitBox.x + xSpeed,hitBox.y + ySpeed,hitBox.width,hitBox.height,lvlData)) {
-			hitBox.x += xSpeed;
-			hitBox.y += ySpeed;
-			moving = true;
-		}
+		if(inAir) {
+			if(CanMoveHere(hitBox.x, hitBox.y + airSpeed,hitBox.width,hitBox.height, lvlData )) {
+				hitBox.y += airSpeed;
+				airSpeed += gravity;
+				updateXPos(xSpeed);
+			}else {
+				hitBox.y = GetEntityYPosUnderRoofOraboveFloor(hitBox,airSpeed);
+				if(airSpeed > 0)
+					resetInAir();
+				else
+					airSpeed = fallSpeedAfterCollision;
+				updateXPos(xSpeed);
+			}
+		}else {
+			updateXPos(xSpeed);
+			}
+		moving = true;
 	}
 	
+	private void jump() {
+		if(inAir)
+			return;
+		inAir = true;
+		airSpeed = jumpSpeed;
+		
+	}
+
+	private void resetInAir() {
+		inAir = false;
+		airSpeed = 0;
+	}
+
+	private void updateXPos(float xSpeed) {
+		if (CanMoveHere(hitBox.x + xSpeed,hitBox.y ,hitBox.width,hitBox.height,lvlData)) {
+			hitBox.x += xSpeed;
+		}
+		else {
+			hitBox.x = GetEntityXPosNextToWall(hitBox,xSpeed);
+		}
+	}
+
 	private void loadAnimation() {
 		
 
@@ -133,6 +175,9 @@ public class Player extends Entity {
 	}
 	public void loadLvlData(int[][] lvlData ) {
 		this.lvlData = lvlData;
+		if(!IsEntityOnFloor(hitBox, lvlData)) {
+			inAir = true;
+		}
 	}
 
 	public boolean isLeft() {
@@ -165,6 +210,10 @@ public class Player extends Entity {
 
 	public void setDown(boolean down) {
 		this.down = down;
+	}
+	
+	public void setJump(boolean jump) {
+		this.jump = jump;
 	}
 
 	public void resetDirBooleans() {
