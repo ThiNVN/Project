@@ -14,6 +14,13 @@ public class LoadSave {
 	public static final String PlAYER_ATLAS ="player_sprites.png";
 	public static final String LEVEL_ATLAS = "outside_sprites.png";
 	public final static String LEVEL_ONE_DATA = "level_one_data.png";
+	public final static String ENEMY_ATTACK_SPRITE = "Skeleton Attack.png";
+	public final static String ENEMY_DEAD_SPRITE = "Skeleton Dead.png";
+	public final static String ENEMY_HIT_SPRITE = "Skeleton Hit.png";
+	public final static String ENEMY_IDLE_SPRITE = "Skeleton Idle.png";
+	public final static String ENEMY_REACT_SPRITE = "Skeleton React.png";
+	public final static String ENEMY_WALK_SPRITE = "Skeleton Walk.png";
+	
 	public static BufferedImage GetSpriteAtlas(String fileName) {
 		BufferedImage img = null;
 		InputStream is = LoadSave.class.getResourceAsStream("/" + fileName);
