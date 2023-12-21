@@ -5,12 +5,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 import Level.LevelManager;
+import entities.EnemyManager;
 import entities.Player;
 import main.Game;
 
 public class playing extends State implements StateMethods {
 	private Player player;
 	private LevelManager levelManager;
+	private EnemyManager enemyManager;
 	public playing(Game game) {
 		super(game);
 		 initClasses();
@@ -19,6 +21,7 @@ public class playing extends State implements StateMethods {
 	
 	private void initClasses() {
 		levelManager = new LevelManager(game);
+		enemyManager = new EnemyManager(this);
 		player = new Player(200, 200, (int)( 64 * Game.SCALE), (int) (40 * Game.SCALE));
 		 player.loadLvlData(levelManager.getCurrentlevel().getLevelData());
 	}
