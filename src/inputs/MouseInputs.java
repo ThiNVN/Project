@@ -17,13 +17,31 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
+		switch (gamestate.state) {
+		case PLAYING:
+			gamePanel.GetGame().getPlaying().mouseDragged(e);
+			break;
+		default:
+			break;
+
+		}
 
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		
+		switch (gamestate.state) {
+		case MENU:
+			gamePanel.GetGame().getMenu().mouseMoved(e);
+			break;
+		case PLAYING:
+			gamePanel.GetGame().getPlaying().mouseMoved(e);
+			break;
+		default:
+			break;
+
+		}
+
 	}
 
 	@Override
@@ -43,13 +61,33 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
+		switch (gamestate.state) {
+		case MENU:
+			gamePanel.GetGame().getMenu().mousePressed(e);
+			break;
+		case PLAYING:
+			gamePanel.GetGame().getPlaying().mousePressed(e);
+			break;
+		default:
+			break;
+
+		}
 
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
+		switch (gamestate.state) {
+		case MENU:
+			gamePanel.GetGame().getMenu().mouseReleased(e);
+			break;
+		case PLAYING:
+			gamePanel.GetGame().getPlaying().mouseReleased(e);
+			break;
+		default:
+			break;
+
+		}
 
 	}
 
