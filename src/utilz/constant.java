@@ -1,43 +1,37 @@
 package utilz;
 
+import main.Game;
+
 public class constant {
 	
-	public static class EnemyConstants {
-		public static final int SKELETON = 0;
+	public static class UI {
 		
-		public static final int IDLE = 0;
-		public static final int WALK = 1;
-		public static final int ATTACK = 2;
-		public static final int HIT = 3;
-		public static final int DEAD = 4;
-		public static final int REACT = 5;
+		public static class PauseButtons {
+			public static final int SOUND_SIZE_DEFAULT = 42;
+			public static final int SOUND_SIZE = (int) (SOUND_SIZE_DEFAULT * Game.SCALE);
+		}
 		
-		public static final int SKELETON_WIDTH_DEFAULT = 43;
-		public static final int SKELETON_HEIGHT_DEFAULT = 37;
+		public static class URMButtons {
+			public static final int URM_DEFAULT_SIZE = 56;
+			public static final int URM_SIZE = (int) (URM_DEFAULT_SIZE * Game.SCALE);
+
+		}
 		
-		public static final int SKELETON_WIDTH = (int)(SKELETON_WIDTH_DEFAULT * Game.SCALE);
-		public static final int SKELETON_HEIGHT = (int)(SKELETON_HEIGHT_DEFAULT * Game.SCALE);
+		public static class VolumeButtons {
+			public static final int VOLUME_DEFAULT_WIDTH = 28;
+			public static final int VOLUME_DEFAULT_HEIGHT = 44;
+			public static final int SLIDER_DEFAULT_WIDTH = 215;
+
+			public static final int VOLUME_WIDTH = (int) (VOLUME_DEFAULT_WIDTH * Game.SCALE);
+			public static final int VOLUME_HEIGHT = (int) (VOLUME_DEFAULT_HEIGHT * Game.SCALE);
+			public static final int SLIDER_WIDTH = (int) (SLIDER_DEFAULT_WIDTH * Game.SCALE);
+		}
 		
-		public static int GetSpriteAmount(int enemy_type, int enemy_state) {
-			switch(enemy_type) {
-			case SKELETON:
-				switch(enemy_state) {
-				case IDLE:
-					return 11;
-				case WALK:
-					return 13;
-				case ATTACK:
-					return 18;
-				case HIT:
-					return 8;
-				case DEAD:
-					return 15;
-				case REACT:
-					return 4;
-				}
-			}
-			
-			return 0;
+		public static class Buttons {
+			public static final int B_WIDTH_DEFAULT = 140;
+			public static final int B_HEIGHT_DEFAULT = 56;
+			public static final int B_WIDTH = (int) (B_WIDTH_DEFAULT * Game.SCALE);
+			public static final int B_HEIGHT = (int) (B_HEIGHT_DEFAULT * Game.SCALE);
 		}
 	}
 	
