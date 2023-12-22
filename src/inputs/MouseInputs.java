@@ -47,9 +47,6 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		switch(gamestate.state) {
-		case MENU:
-			gamePanel.GetGame().getMenu().mouseClicked(e);
-			break;
 		case PLAYING:
 			gamePanel.GetGame().getPlaying().mouseClicked(e);
 			break;
