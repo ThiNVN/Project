@@ -1,5 +1,6 @@
 package gamestates;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -60,7 +61,7 @@ public class playing extends State implements StateMethods {
 		int playerX = (int) player.getHitBox().x;
 		int diff = playerX - xLvlOffset;
 		
-		int (diff > rightBorder)
+		if (diff > rightBorder)
 			xLvlOffset += diff - rightBorder;
 		else if(diff < leftBorder)
 			xLvlOffset += diff - leftBorder;
