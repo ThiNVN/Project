@@ -19,7 +19,7 @@ public class Player extends Entity {
 	private int playerAction = IDLE;
 	private boolean left, up ,right, down, jump;
 	private boolean moving = false, attacking = false;
-	private float playerSpeed = 2.0f;
+	private float playerSpeed = 1.5f * Game.SCALE;
 	private int[][] lvlData;
 	private float xDrawOffset = 21 * Game.SCALE;
 	private float yDrawOffset = 4 * Game.SCALE;
@@ -49,7 +49,7 @@ public class Player extends Entity {
 	
 	public void render(Graphics g, int lvlOffset) {
 		g.drawImage(animations[playerAction][aniDex],(int)(hitBox.x - xDrawOffset) - lvlOffset, (int)(hitBox.y - yDrawOffset), width, height, null);
-//		drawHitbox(g);
+//		drawHitbox(g, lvlOffset);
 	}
 	
 	

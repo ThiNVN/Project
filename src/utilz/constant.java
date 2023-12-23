@@ -90,6 +90,9 @@ public class constant {
 		public static final int NIGHTBORNE_WIDTH = (int)(NIGHTBORNE_WIDTH_DEFAULT * Game.SCALE);
 		public static final int NIGHTBORNE_HEIGHT = (int)(NIGHTBORNE_HEIGHT_DEFAULT * Game.SCALE);
 		
+		public static final int NIGHTBORNE_DRAWOFFSET_X = (int)(21 * Game.SCALE);
+		public static final int NIGHTBORNE_DRAWOFFSET_Y = (int)(9 * Game.SCALE);
+		
 		public static int GetSpriteAmount(int enemy_type, int enemy_state) {
 			switch(enemy_type) {
 			case NIGHTBORNE:

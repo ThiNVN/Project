@@ -25,9 +25,9 @@ public class EnemyManager {
 		System.out.println("Size of Nightbornes: " + nightbornes.size());
 	}
 
-	public void update() {
+	public void update(int[][] lvlData) {
 		for(Nightborne n : nightbornes) {
-			n.update();
+			n.update(lvlData);
 		}
 	}
 	
@@ -37,7 +37,7 @@ public class EnemyManager {
 	
 	private void drawNightbornes(Graphics g, int xLvlOffset) {
 		for(Nightborne n : nightbornes) {
-			g.drawImage(nightborneArr[n.getEnemyState()][n.getAniIndex()], (int)n.getHitBox().x - xLvlOffset, (int)n.getHitBox().y, NIGHTBORNE_WIDTH, NIGHTBORNE_HEIGHT, null);
+			g.drawImage(nightborneArr[n.getEnemyState()][n.getAniIndex()], (int)n.getHitBox().x - xLvlOffset - 54, (int)n.getHitBox().y - 54, NIGHTBORNE_WIDTH, NIGHTBORNE_HEIGHT, null);
 		}
 	}
 

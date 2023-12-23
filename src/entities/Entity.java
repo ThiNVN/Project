@@ -17,9 +17,9 @@ public abstract class Entity {
 		this.height = height;
 		
 	}
-	protected void drawHitbox(Graphics g) {
+	protected void drawHitbox(Graphics g, int xLvlOffset) {
 			g.setColor(Color.RED);
-			g.drawRect((int)hitBox.x, (int)hitBox.y,(int)hitBox.width,(int)hitBox.height);
+			g.drawRect((int)hitBox.x - xLvlOffset, (int)hitBox.y,(int)hitBox.width,(int)hitBox.height);
 	}
 	protected void initHitBox(float x,float y,float width,float height) {
 		hitBox = new Rectangle2D.Float(x, y, width, height);
