@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.util.Random;
 
 import Level.LevelManager;
 import entities.EnemyManager;
@@ -11,6 +13,7 @@ import entities.Player;
 import main.Game;
 import ui.PauseOverlay;
 import utilz.LoadSave;
+import static utilz.constant.Environments.*;
 
 public class playing extends State implements StateMethods {
 	private Player player;
@@ -26,10 +29,21 @@ public class playing extends State implements StateMethods {
 	private int maxTilesOffset = lvlTilesWide - Game.TILES_IN_WIDTH;
 	private int maxLvlOffsetX = maxTilesOffset * Game.TILES_SIZE;
 	
+	private BufferedImage backgroundImg, bigCloud, smolCloud;
+	private int[] smolCloudsPos;
+	private Random rnd = new Random();
+	
 	
 	public playing(Game game) {
 		super(game);
 		 initClasses();
+		 
+		 backgroundImg = LoadSave.GetSpriteAtlas(LoadSave.PLAYING_BG_IMG);
+		 bigCloud = LoadSave.GetSpriteAtlas(LoadSave.BIG_CLOUDS);
+		 smolCloud = LoadSave.GetSpriteAtlas(LoadSave.SMOL_CLOUDS);
+		 smolCloudsPos = new int[8];
+		 for(int i = 0; i < smolCloudsPos.length; i++)
+			 smolCloudsPos[i] = (int)(70 * Game.SCALE) + rnd.nextInt((int)(150 * Game.SCALE));
 	}
 	
 	
@@ -74,6 +88,10 @@ public class playing extends State implements StateMethods {
 
 	@Override
 	public void draw(Graphics g) {
+		g.drawImage(backgroundImg, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
+		
+		drawClouds(g);
+		
 		levelManager.draw(g, xLvlOffset);
 		player.render(g, xLvlOffset);
 		enemyManager.draw(g, xLvlOffset);
@@ -83,6 +101,15 @@ public class playing extends State implements StateMethods {
 			g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
 			pauseOverlay.draw(g);
 		}
+	}
+
+
+	private void drawClouds(Graphics g) {
+		for (int i = 0; i < 3; i++)
+			g.drawImage(bigCloud, i * BIG_CLOUD_WIDTH - (int) (xLvlOffset * 0.3), (int)(204 * Game.SCALE), BIG_CLOUD_WIDTH, BIG_CLOUD_HEIGHT, null);
+		
+		for (int i = 0; i < smolCloudsPos.length; i++ )
+		g.drawImage(smolCloud, SMOL_CLOUD_WIDTH * 4 * i - (int) (xLvlOffset * 0.7), smolCloudsPos[i], SMOL_CLOUD_WIDTH, SMOL_CLOUD_HEIGHT, null);
 	}
 
 

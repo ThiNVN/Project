@@ -3,6 +3,19 @@ package utilz;
 import main.Game;
 
 public class constant {
+	public static class Environments {
+		public static final int BIG_CLOUD_WIDTH_DEFAULT = 448;
+		public static final int BIG_CLOUD_HEIGHT_DEFAULT = 101;
+		
+		public static final int SMOL_CLOUD_WIDTH_DEFAULT = 75;
+		public static final int SMOL_CLOUD_HEIGHT_DEFAULT = 25;
+			
+		public static final int BIG_CLOUD_WIDTH = (int)(BIG_CLOUD_WIDTH_DEFAULT * Game.SCALE);
+		public static final int BIG_CLOUD_HEIGHT = (int)(BIG_CLOUD_HEIGHT_DEFAULT * Game.SCALE);
+		
+		public static final int SMOL_CLOUD_WIDTH = (int)(BIG_CLOUD_WIDTH_DEFAULT * Game.SCALE);
+		public static final int SMOL_CLOUD_HEIGHT = (int)(BIG_CLOUD_HEIGHT_DEFAULT * Game.SCALE);
+	}
 	
 	public static class UI {
 		
