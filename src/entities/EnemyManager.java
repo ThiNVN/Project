@@ -25,9 +25,9 @@ public class EnemyManager {
 		System.out.println("Size of Nightbornes: " + nightbornes.size());
 	}
 
-	public void update(int[][] lvlData) {
+	public void update(int[][] lvlData, Player player) {
 		for(Nightborne n : nightbornes) {
-			n.update(lvlData);
+			n.update(lvlData, player);
 		}
 	}
 	
