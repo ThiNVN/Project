@@ -3,6 +3,7 @@ package entities;
 import gamestates.playing;
 
 import java.awt.Graphics;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -27,7 +28,9 @@ public class EnemyManager {
 
 	public void update(int[][] lvlData, Player player) {
 		for(Nightborne n : nightbornes) {
-			n.update(lvlData, player);
+			if(n.isActive()) {
+				n.update(lvlData, player);
+			}
 		}
 	}
 	
@@ -37,7 +40,20 @@ public class EnemyManager {
 	
 	private void drawNightbornes(Graphics g, int xLvlOffset) {
 		for(Nightborne n : nightbornes) {
-			g.drawImage(nightborneArr[n.getEnemyState()][n.getAniIndex()], (int)n.getHitBox().x - xLvlOffset - 54, (int)n.getHitBox().y - 54, NIGHTBORNE_WIDTH, NIGHTBORNE_HEIGHT, null);
+			if(n.isActive()) {
+				g.drawImage(nightborneArr[n.getEnemyState()][n.getAniIndex()], (int)n.getHitBox().x - xLvlOffset - 54 + n.flipX(), (int)n.getHitBox().y - 54, NIGHTBORNE_WIDTH * n.flipW(), NIGHTBORNE_HEIGHT, null);
+		//		n.drawHitbox(g, xLvlOffset + 20);
+		//		n.drawAttackBox(g, xLvlOffset);
+			}
+		}
+	}
+	
+	public void checkEnemyHit(Rectangle2D.Float attackBox) {
+		for(Nightborne n : nightbornes) {
+			if(attackBox.intersects(n.getHitBox())) {
+				n.hurt(10);
+				return;
+			}
 		}
 	}
 
@@ -48,6 +64,12 @@ public class EnemyManager {
 			for(int i=0; i < nightborneArr[j].length; i++) {
 				nightborneArr[j][i] = temp.getSubimage(i * NIGHTBORNE_WIDTH_DEFAULT, j * NIGHTBORNE_HEIGHT_DEFAULT, NIGHTBORNE_WIDTH_DEFAULT, NIGHTBORNE_HEIGHT_DEFAULT);
 			}
+		}
+	}
+	
+	public void resetAllEnemies() {
+		for(Nightborne n : nightbornes) {
+			n.resetEnemy();
 		}
 	}
 }

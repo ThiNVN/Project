@@ -30,6 +30,7 @@ public class LoadSave {
 	public static final String PLAYING_BG_IMG = "game_bg.png";
 	public static final String BIG_CLOUDS = "big_clouds.png";
 	public static final String SMOL_CLOUDS = "small_clouds.png";
+	public static final String STATUS_BAR = "health_power_bar.png";
 	
 	public static BufferedImage GetSpriteAtlas(String fileName) {
 		BufferedImage img = null;
@@ -40,7 +41,7 @@ public class LoadSave {
 			
 		} catch (IOException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				is.close();
 			} catch (IOException e) {
