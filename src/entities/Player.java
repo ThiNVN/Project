@@ -50,7 +50,7 @@ public class Player extends Entity {
 	private int healthBarXStart = (int) (34 * Game.SCALE);
 	private int healthBarYStart = (int) (14 * Game.SCALE);
 	
-	private int maxHealth = 100;
+	private int maxHealth = 10;
 	private int currentHealth = maxHealth;
 	private int healthWidth = healthBarWidth;
 	
@@ -79,8 +79,17 @@ public class Player extends Entity {
 
 	public void update() {
 		updateHealthBar();
-		if(currentHealth <= 0) {
-			playing.setGameOver(true);
+		if (currentHealth <= 0) {
+			if (playerAction != DEAD) {
+				playerAction = DEAD;
+				aniTick = 0;
+				aniDex = 0;
+				playing.setPlayerDying(true);
+			} else if (aniDex == GetSpriteAmount(DEAD) - 1 && aniTick >= aniSpeed - 1) {
+				playing.setGameOver(true);
+			} else
+				updateAnimationTick();
+
 			return;
 		}
 		

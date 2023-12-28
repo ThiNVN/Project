@@ -31,7 +31,8 @@ public class LoadSave {
 	public static final String BIG_CLOUDS = "big_clouds.png";
 	public static final String SMOL_CLOUDS = "small_clouds.png";
 	public static final String STATUS_BAR = "health_power_bar.png";
-	
+	public static final String DEATH_SCREEN = "death_screen.png";
+	public static final String OPTIONS_MENU = "options_background.png";
 	public static BufferedImage GetSpriteAtlas(String fileName) {
 		BufferedImage img = null;
 		InputStream is = LoadSave.class.getResourceAsStream("/" + fileName);

@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
-import java.awt.geom.Rectangle2D.Float;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
@@ -38,6 +37,7 @@ public class playing extends State implements StateMethods {
 	private Random rnd = new Random();
 	
 	private boolean gameOver;
+	private boolean playerDying;
 	
 	
 	public playing(Game game) {
@@ -71,9 +71,15 @@ public class playing extends State implements StateMethods {
 			levelManager.update();
 			player.update();
 			checkCloseToBorder();
-			
 			enemyManager.update(levelManager.getCurrentlevel().getLevelData(), player);
-		} else {
+		} 
+		else if (gameOver) {
+			gameOverOverlay.update();
+		}
+		else if(playerDying) {
+			player.update();
+		}
+		else {
 			pauseOverlay.update();
 		}
 	}
@@ -124,6 +130,7 @@ public class playing extends State implements StateMethods {
 	public void resetAll() {
 		gameOver = false;
 		paused = false;
+		playerDying = false;
 		player.resetAll();
 		enemyManager.resetAllEnemies();
 		
@@ -144,19 +151,22 @@ public class playing extends State implements StateMethods {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if(!gameOver)
+		if (!gameOver) {
 			if (paused)
 				pauseOverlay.mousePressed(e);
+		} else
+			gameOverOverlay.mousePressed(e);
 
 	}
 
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		if(!gameOver)
+		if (!gameOver) {
 			if (paused)
 				pauseOverlay.mouseReleased(e);
-
+		} else
+			gameOverOverlay.mouseReleased(e);
 	}
 
 	public void mouseDragged(MouseEvent e) {
@@ -167,10 +177,11 @@ public class playing extends State implements StateMethods {
 	
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		if(!gameOver)
+		if (!gameOver) {
 			if (paused)
 				pauseOverlay.mouseMoved(e);
-
+		} else
+			gameOverOverlay.mouseMoved(e);
 	}
 
 
@@ -228,6 +239,12 @@ public class playing extends State implements StateMethods {
 
 	public void setGameOver(boolean gameOver) {
 		this.gameOver = gameOver;
+		
+	}
+
+
+	public void setPlayerDying(boolean playerDyin) {
+		this.playerDying = playerDying;
 		
 	}
 }
