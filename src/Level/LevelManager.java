@@ -2,6 +2,7 @@ package Level;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import main.Game;
 import utilz.LoadSave;
@@ -10,6 +11,8 @@ public class LevelManager {
 	private Game game;
 	private BufferedImage[] LevelSprite;
 	private Level levelOne;
+	private ArrayList <Level> Level;
+	private int lvlIndex = 0;
 	public LevelManager(Game game) {
 		this.game = game;
 //		LevelSprite = LoadSave.GetSpriteAtlas(LoadSave.LEVEL_ATLAS);
@@ -43,5 +46,8 @@ public class LevelManager {
 	public void render(Graphics g) {
 		// TODO Auto-generated method stub
 		
+	}
+	public int getLevelIndex(){
+		return lvlIndex;
 	}
 }

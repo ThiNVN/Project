@@ -247,4 +247,7 @@ public class playing extends State implements StateMethods {
 		this.playerDying = playerDying;
 		
 	}
+	public LevelManager getLevelManager(){
+		return levelManager;
+	}
 }

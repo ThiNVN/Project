@@ -24,7 +24,7 @@ public class PauseOverlay {
 		this.playing = playing;
 		loadBackground();
 		audioOptions = playing.getGame().getAudioOptions();
-		this.audioOptions = new AudioOptions();
+		
 		createUrmButtons();
 
 	}
@@ -89,7 +89,8 @@ public class PauseOverlay {
 	public void mouseReleased(MouseEvent e) {
 		if (isIn(e, menuB)) {
 			if (menuB.isMousePressed()) {
-				gamestate.state = gamestate.MENU;
+				playing.resetAll();
+				playing.setGameState(gamestate.MENU);
 				playing.unpauseGame();
 			}
 		} else if (isIn(e, replayB)) {
