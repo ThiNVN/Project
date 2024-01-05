@@ -275,7 +275,7 @@ public class playing extends State implements StateMethods {
 	}
 
 
-	public void setPlayerDying(boolean playerDyin) {
+	public void setPlayerDying(boolean playerDying) {
 		this.playerDying = playerDying;
 		
 	}
