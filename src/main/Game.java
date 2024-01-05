@@ -7,6 +7,7 @@ import gamestates.GameOptions;
 import gamestates.gamestate;
 import gamestates.playing;
 import ui.AudioOptions;
+import utilz.LoadSave;
 import gamestates.menu;
 
 public class Game implements Runnable { 		
@@ -32,6 +33,8 @@ public class Game implements Runnable {
 	public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;
 	
 	public Game() {
+		initClasses();
+		
 		initClasses();
 		gamePanel = new GamePanel(this);
 		gameWindow = new GameWindow(gamePanel);

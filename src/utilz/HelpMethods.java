@@ -1,7 +1,13 @@
 package utilz;
 
-import java.awt.geom.Rectangle2D;
+import static utilz.constant.EnemyConstants.NIGHTBORNE;
 
+import java.awt.Color;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
+import entities.Nightborne;
 import main.Game;
 
 public class HelpMethods {
@@ -72,7 +78,10 @@ public class HelpMethods {
 	}
 	
 	public static boolean IsFloor(Rectangle2D.Float hitBox, float xSpeed, int[][] lvlData) {
-		return IsSolid(hitBox.x + xSpeed, hitBox.y + hitBox.height + 1, lvlData);
+		if(xSpeed > 0)
+			return IsSolid(hitBox.x + hitBox.width + xSpeed, hitBox.y + hitBox.height + 1, lvlData);
+		else 
+			return IsSolid(hitBox.x + xSpeed, hitBox.y + hitBox.height + 1, lvlData);
 	}
 	
 	public static boolean IsAllTilesWalkable(int xStart, int xEnd, int y, int[][] lvlData) {
@@ -97,6 +106,36 @@ public class HelpMethods {
 			return IsAllTilesWalkable(firstXTile, secondXTile, yTile, lvlData);
 		}
 	}
+	
+	
+	public static int[][] GetLevelData(BufferedImage img){
+		
+		int[][] lvlData = new int[img.getHeight()][img.getWidth()];
+		
+		for (int j = 0;j < img.getHeight(); j++)
+			for (int i = 0;i < img.getTileWidth(); i++) {
+				Color color  = new Color(img.getRGB(i, j)); 
+				int value = color.getRed();
+				if ( value >= 48)
+					value = 0;
+				lvlData [j][i] = value;
+			}
+			return lvlData;	
+	}
+	
+	public static ArrayList<Nightborne> GetNightbornes(BufferedImage img) {
+		ArrayList<Nightborne> list = new ArrayList<>();
+		for (int j = 0;j < img.getHeight(); j++)
+			for (int i = 0;i < img.getTileWidth(); i++) {
+				Color color  = new Color(img.getRGB(i, j)); 
+				int value = color.getGreen();
+				if ( value == NIGHTBORNE) {
+					list.add(new Nightborne(i * Game.TILES_SIZE, j * Game.TILES_SIZE));
+				}	
+		}
+		return list;
+	}
+	
 }
 
 

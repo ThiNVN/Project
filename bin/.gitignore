@@ -1,6 +1,8 @@
-/main/
+/utilz/
+/entities/
+/completed_stage.png
 /ui/
 /gamestates/
-/options_background.png
-/utilz/
-/inputs/
+/lvls/
+/main/
+/Level/

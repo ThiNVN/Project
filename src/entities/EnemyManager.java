@@ -7,6 +7,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import Level.Level;
 import utilz.LoadSave;
 import static utilz.constant.EnemyConstants.*;
 
@@ -18,20 +19,22 @@ public class EnemyManager {
 	public EnemyManager(playing playing) {
 		this.playing = playing;
 		loadEnemyImgs();
-		addEnemies();
 	}
 	
-	private void addEnemies() {
-		nightbornes = LoadSave.GetNightbornes();
+	public void loadEnemies(Level level) {
+		nightbornes = level.getNightbornes();
 		System.out.println("Size of Nightbornes: " + nightbornes.size());
 	}
 
 	public void update(int[][] lvlData, Player player) {
-		for(Nightborne n : nightbornes) {
+		boolean isAnyActive = false;
+		for(Nightborne n : nightbornes) 
 			if(n.isActive()) {
 				n.update(lvlData, player);
+				isAnyActive = true;
 			}
-		}
+		if(!isAnyActive)
+			playing.setLevelCompleted(true);
 	}
 	
 	public void draw(Graphics g, int xLvlOffset) {
