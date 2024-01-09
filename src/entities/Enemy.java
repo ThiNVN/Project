@@ -107,7 +107,7 @@ public abstract class Enemy extends Entity {
 	public void hurt(int amount) {
 		currentHealth -= amount;
 		if(currentHealth <= 0) {
-			deleteHitBox();
+//			deleteHitBox();
 			newState(DEAD);
 		} else {
 			newState(HURT);
