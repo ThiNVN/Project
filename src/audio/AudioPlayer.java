@@ -29,7 +29,7 @@ public class AudioPlayer {
 
     private Clip[] songs, effects;
     private int currentSongId;
-    private float volume = 1f;
+    private float volume = 0.5f;
     private boolean songMute, effectMute;
     private Random rand = new Random();
 
@@ -94,10 +94,11 @@ public class AudioPlayer {
 
     public void playAttackSound(){
         int start = 4;
-        start += rand.nextInt(2);
+        start += rand.nextInt(3);
         playEffect(start);
     }
     public void playEffect(int effect){
+        if(effects[effect].getMicrosecondPosition()>0)
         effects[effect].setMicrosecondPosition(0);
         effects[effect].start();
     }
@@ -118,7 +119,7 @@ public class AudioPlayer {
         }
     }
     public void toggleEffectMute(){
-        this.songMute = !effectMute;
+        this.effectMute = !effectMute;
         for (Clip c : effects){
             BooleanControl booleanControl = (BooleanControl) c.getControl(BooleanControl.Type.MUTE);
             booleanControl.setValue(effectMute);
