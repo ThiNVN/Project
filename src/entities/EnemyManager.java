@@ -7,6 +7,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import gamestates.playing;
 import Level.Level;
 import utilz.LoadSave;
 import static utilz.constant.EnemyConstants.*;
@@ -44,7 +45,7 @@ public class EnemyManager {
 	private void drawNightbornes(Graphics g, int xLvlOffset) {
 		for(Nightborne n : nightbornes) {
 			if(n.isActive()) {
-				g.drawImage(nightborneArr[n.getEnemyState()][n.getAniIndex()], (int)n.getHitBox().x - xLvlOffset - 54 + n.flipX(), (int)n.getHitBox().y - 54, NIGHTBORNE_WIDTH * n.flipW(), NIGHTBORNE_HEIGHT, null);
+				g.drawImage(nightborneArr[n.getstate()][n.getAniIndex()], (int)n.getHitBox().x - xLvlOffset - 54 + n.flipX(), (int)n.getHitBox().y - 54, NIGHTBORNE_WIDTH * n.flipW(), NIGHTBORNE_HEIGHT, null);
 		//		n.drawHitbox(g, xLvlOffset + 20);
 		//		n.drawAttackBox(g, xLvlOffset);
 			}

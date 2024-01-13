@@ -17,12 +17,11 @@ import main.Game;
 
 public class Nightborne extends Enemy {
 	//AttackBox
-	private Rectangle2D.Float attackBox;
 	private int attackBoxOffsetX;
 	
 	public Nightborne(float x, float y) {
 		super(x, y, NIGHTBORNE_WIDTH, NIGHTBORNE_HEIGHT, NIGHTBORNE);
-		initHitBox(x, y, (int)(31 * Game.SCALE), (int)(28 * Game.SCALE));
+		initHitBox(31,28);
 		initAttackBox();
 	}
 	
@@ -39,7 +38,7 @@ public class Nightborne extends Enemy {
 		if(inAir) {
 			updateInAir(lvlData);
 		}else {
-			switch(enemyState) {
+			switch(state) {
 			case IDLE:
 				newState(RUNNING);
 				break;
@@ -54,11 +53,11 @@ public class Nightborne extends Enemy {
 				move(lvlData);
 				break;
 			case ATTACK:
-				if(aniIndex == 0) {
+				if(aniDex == 0) {
 					attackChecked = false;
 				}
 				
-				if(aniIndex == 10 && !attackChecked) {
+				if(aniDex == 10 && !attackChecked) {
 					checkEnemyHit(attackBox, player);
 				}
 				break;
@@ -83,11 +82,6 @@ public class Nightborne extends Enemy {
 		} else {
 			return 1;
 		}
-	}
-	
-	public void drawAttackBox(Graphics g, int xLvlOffset) {
-		g.setColor(Color.red);
-		g.drawRect((int)(attackBox.x - xLvlOffset),(int) attackBox.y,(int) attackBox.width,(int) attackBox.height);
 	}
 	
 	public void update(int[][] lvlData, Player player) {

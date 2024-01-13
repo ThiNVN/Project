@@ -3,6 +3,10 @@ package utilz;
 import main.Game;
 
 public class constant {
+	
+	public static final float GRAVITY = 0.04f * Game.SCALE;
+	public static final int ANI_SPEED = 25;
+	
 	public static class Environments {
 		public static final int BIG_CLOUD_WIDTH_DEFAULT = 448;
 		public static final int BIG_CLOUD_HEIGHT_DEFAULT = 101;
