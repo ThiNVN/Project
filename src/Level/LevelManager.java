@@ -9,7 +9,6 @@ import main.Game;
 import utilz.LoadSave;
 
 public class LevelManager {
-
 	private Game game;
 	private BufferedImage[] LevelSprite;
 	private ArrayList<Level> levels;
@@ -25,14 +24,18 @@ public class LevelManager {
 	}
 	
 	public void loadNextLevel() {
-		
+		lvlIndex++;
+		if(lvlIndex >= levels.size()) {
+			lvlIndex = 0;
+			System.out.println("Game Completed!!!");
+			gamestate.state = gamestate.MENU;
+		}
 		
 		Level newLevel = levels.get(lvlIndex);
 		game.getPlaying().getEnemyManager().loadEnemies(newLevel);
 		game.getPlaying().GetPlayer().loadLvlData(newLevel.getLevelData());
 		game.getPlaying().setMaxLvlOffset(newLevel.getLvlOffset());
 	}
-
 	private void buildAllLevels() {
 		BufferedImage[] allLevels = LoadSave.GetAllLevels();
 		for(BufferedImage img : allLevels)
@@ -73,8 +76,5 @@ public class LevelManager {
 	}
 	public int getLevelIndex(){
 		return lvlIndex;
-	}
-	public void setLevelIndex(int lvlIndex){
-		this.lvlIndex = lvlIndex;
 	}
 }
