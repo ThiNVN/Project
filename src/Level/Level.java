@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 import entities.Nightborne;
 import main.Game;
+import objects.GameContainer;
+import objects.Potion;
+
 import static utilz.HelpMethods.GetLevelData;
 import static utilz.HelpMethods.GetNightbornes;
 import static utilz.HelpMethods.GetPlayerSpawn;
@@ -17,6 +20,8 @@ public class Level {
 	private int[][] lvlData;
 	
 	private ArrayList<Nightborne> nightbornes;
+	private ArrayList<Potion> potions;
+	private ArrayList<GameContainer> containers;
 	private int lvlTilesWide;
 	private int maxTilesOffset;
 	private int maxLvlOffsetX;
@@ -26,8 +31,18 @@ public class Level {
 		this.img = img;
 		createLevelData();
 		createEnemies();
+		createPotions();
+		createContainers();
 		calcLvlOffsets();
 		calcPlayerSpawn();
+		
+	}
+	private void createContainers() {
+		// TODO Auto-generated method stub
+		
+	}
+	private void createPotions() {
+		// TODO Auto-generated method stub
 		
 	}
 	private void calcPlayerSpawn() {
