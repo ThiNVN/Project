@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import entities.Nightborne;
 import main.Game;
+import objects.GameContainer;
 import objects.Potion;
 
 public class HelpMethods {
@@ -163,6 +164,18 @@ public class HelpMethods {
 		return list;
 	}
 	
-}
+	public static ArrayList<GameContainer> GetContainers(BufferedImage img) {
+		ArrayList<GameContainer> list = new ArrayList<>();
+		for (int j = 0; j < img.getHeight(); j++)
+			for (int i = 0; i < img.getWidth(); i++) {
+				Color color = new Color(img.getRGB(i, j));
+				int value = color.getBlue();
+				if (value == BOX || value == BARREL)
+					list.add(new GameContainer(i * Game.TILES_SIZE, j * Game.TILES_SIZE, value));
+			}
+
+		return list;
+		}
+	}
 
 

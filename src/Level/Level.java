@@ -8,6 +8,7 @@ import entities.Nightborne;
 import main.Game;
 import objects.GameContainer;
 import objects.Potion;
+import utilz.HelpMethods;
 
 import static utilz.HelpMethods.GetLevelData;
 import static utilz.HelpMethods.GetNightbornes;
@@ -38,11 +39,11 @@ public class Level {
 		
 	}
 	private void createContainers() {
-		// TODO Auto-generated method stub
+		containers = HelpMethods.GetContainers(img);
 		
 	}
 	private void createPotions() {
-		// TODO Auto-generated method stub
+		potions = HelpMethods.GetPotions(img);
 		
 	}
 	private void calcPlayerSpawn() {
@@ -76,5 +77,11 @@ public class Level {
 	}
 	public Point getPlayerSpawn() {
 		return playerSpawn;
+	}
+	public ArrayList<Potion> getPotions() {
+		return potions;
+	}
+	public ArrayList<GameContainer> getContainers() {
+		return containers;
 	}
 }

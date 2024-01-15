@@ -70,6 +70,10 @@ public class GameObjects {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+	
+	public void setAnimation(boolean doAnimation) {
+		this.doAnimation = doAnimation;
+	}
 
 	public int getxDrawOffset() {
 		return xDrawOffset;
