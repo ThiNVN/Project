@@ -1,4 +1,4 @@
-package Level;
+	package Level;
 
 import java.awt.Point;
 import java.awt.image.BufferedImage;
@@ -8,6 +8,7 @@ import entities.Nightborne;
 import main.Game;
 import objects.GameContainer;
 import objects.Potion;
+import objects.Spike;
 import utilz.HelpMethods;
 
 import static utilz.HelpMethods.GetLevelData;
@@ -22,6 +23,7 @@ public class Level {
 	
 	private ArrayList<Nightborne> nightbornes;
 	private ArrayList<Potion> potions;
+	private ArrayList<Spike> spikes;
 	private ArrayList<GameContainer> containers;
 	private int lvlTilesWide;
 	private int maxTilesOffset;
@@ -34,8 +36,13 @@ public class Level {
 		createEnemies();
 		createPotions();
 		createContainers();
+		createSpikes();
 		calcLvlOffsets();
 		calcPlayerSpawn();
+		
+	}
+	private void createSpikes() {
+		spikes = HelpMethods.GetSpikes(img);
 		
 	}
 	private void createContainers() {
@@ -83,5 +90,8 @@ public class Level {
 	}
 	public ArrayList<GameContainer> getContainers() {
 		return containers;
+	}
+	public ArrayList<Spike> getSpikes(){
+		return spikes;
 	}
 }
